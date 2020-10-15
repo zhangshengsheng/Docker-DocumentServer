@@ -79,7 +79,12 @@ RUN echo "$REPO_URL" | tee /etc/apt/sources.list.d/ds.list && \
     service supervisor stop && \
     chmod 755 /app/ds/*.sh && \
     rm -rf /var/log/$COMPANY_NAME && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    wget -P /etc/nginx/includes http://file-st10.karelia.ru/r2n4r7/640b9f7d60a20c25c43d66f2c7e06eaa/03bec21112c1a26a96dc05060d6db76b/ds-letsencrypt.conf?force && \
+    mv /etc/nginx/includes/ds-letsencrypt.conf?force /etc/nginx/includes/ds-letsencrypt.conf && \
+    wget -P /usr/bin http://file-st01.karelia.ru/kks26t/92cfd66722e37731557dbdad543ed3aa/f0e222a6662e56cec686225d42c4f1e3/documentserver-letsencrypt.sh?force && \
+    mv /usr/bin/documentserver-letsencrypt.sh?force /usr/bin/documentserver-letsencrypt.sh && \
+    chmod 777 /usr/bin/documentserver-letsencrypt.sh
 
 VOLUME /var/log/$COMPANY_NAME /var/lib/$COMPANY_NAME /var/www/$COMPANY_NAME/Data /var/lib/postgresql /var/lib/rabbitmq /var/lib/redis /usr/share/fonts/truetype/custom
 
